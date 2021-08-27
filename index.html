@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="homepage-menu">
+            <div class="homepage-menu-img"></div>
+
+            <div class="link-wrapper scroll-left"><a class="js-homepage-menu full-width scroll-animation" href="#" data-content="01 Products" data-content-extended="Our products are supposed to be good  Our products are supposed to be good" data-img="./img/01.png">01 Products</a></div>
+            <div class="link-wrapper scroll-left"><a class="js-homepage-menu full-width scroll-animation" href="#" data-content="02 Services" data-content-extended="We provide full range of services related to IT  We provide full range of services related to IT" data-img="./img/02.png">02 Services</a></div>
+
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        $('.js-homepage-menu').on('mouseover', function() {
+
+            const extendedText = $(this).data('content-extended');
+            $(this).toggleClass('active').html(extendedText);
+
+          //  $(this).toggleClass('scroll-animation') 
+
+            const imageUrl = $(this).data('img');
+
+            const translateX = randomInteger(10, 50);
+            const translateY = randomInteger(10, 50);
+
+            $('.homepage-menu-img').css('background-image', 'url(' + imageUrl + ')');
+            $('.homepage-menu-img').css('transform', 'translate(-' + translateX + '%, -' + translateY + '%)')
+
+        });
+
+        $(document).on('mousemove', (event) => {
+            $('.homepage-menu-img').css({
+                left: event.clientX,
+                top: event.clientY,
+            });
+        });
+
+        $('.js-homepage-menu').on('mouseout', function() {
+
+            const originalText = $(this).data('content');
+            $(this).toggleClass('active').html(originalText);
+
+            $('.homepage-menu-img').css('background-image', '');
+        });
+
+        function randomInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    </script>
+
+
+</body>
+
+</html>
